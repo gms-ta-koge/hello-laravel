@@ -6,11 +6,13 @@ RAM = "2048"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "laravel/homestead"
 
-  config.vm.network :private_network, ip: "192.168.33.10"
+  config.vm.synced_folder '.', '/home/vagrant/hello-laravel/'
 
+  config.vm.network :private_network, ip: "192.168.33.10"
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "#{RAM}"
     vb.cpus = "#{CPU_COUNT}"
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
+
 end
